@@ -35,7 +35,7 @@ const Sidebar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false); //Represent where the sidebar will collapse or not.
-  const [selected, setSelected] = useState("Board"); //Determine what page we select and currently at. (Dashboard) as the default
+  const [selected, setSelected] = useState("Dashboard"); //Determine what page we select and currently at. (Dashboard) as the default
   
   return (
     <Box
@@ -50,7 +50,7 @@ const Sidebar = () => {
           padding: "5px 35px 5px 20px !important"
         },
         "& .pro-inner-item:hover": {
-          color: `${colors.blueAccent[500]} !important`,
+          color: `${colors.blueAccent[400]} !important`,
         },
         "& .pro-menu-item.active": {
           color: `${colors.blueAccent[500]} !important`,
@@ -102,9 +102,9 @@ const Sidebar = () => {
 
               <Box textAlign="center">
                 <Typography
-                  variant='h3'
+                  variant='h5'
                   color={colors.grey[100]}
-                  fontWeight="semibold"
+                  fontWeight="600"
                   sx={{ m: "10px 0 0 0"}}
                 >
                   User Name
@@ -122,7 +122,7 @@ const Sidebar = () => {
           {/* MENU ITEMS */}
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
             <Item 
-              title="Board"
+              title="Dashboard"
               to="/"
               icon={<DashboardOutlinedIcon />}
               selected={selected}
