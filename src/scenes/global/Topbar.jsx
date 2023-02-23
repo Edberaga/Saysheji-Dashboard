@@ -23,7 +23,7 @@ export const Topbar = () => {
       <Box 
         display="flex" 
         backgroundColor={colors.primary[900]}
-        borderRadius="3px"
+        borderRadius="1px"
       >
         <InputBase sx={{ml:2, flex: 1}} placeholder="Search" />
         <IconButton type="button" sx={{p:1}}>
@@ -47,4 +47,3 @@ export const Topbar = () => {
     </Box>
   )
 }
-
