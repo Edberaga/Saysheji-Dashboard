@@ -184,7 +184,7 @@ export const themeSettings = (mode) => {
             },
             h6: {
                 fontFamily: ["Poppins", 'sans-serif'].join(","),
-                fontSize: 16,
+                fontSize: 15,
             },
         }
     };
