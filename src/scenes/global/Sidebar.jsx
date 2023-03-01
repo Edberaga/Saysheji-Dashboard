@@ -121,6 +121,14 @@ const Sidebar = () => {
 
           {/* MENU ITEMS */}
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
+            <Typography
+              variant='h6'
+              color={colors.grey[300]}
+              sx={{ m: "15px 0 5px 20px" }}
+            >
+              Main
+            </Typography>
+
             <Item 
               title="Dashboard"
               to="/"
@@ -128,6 +136,14 @@ const Sidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
+
+            <Typography
+              variant='h6'
+              color={colors.grey[300]}
+              sx={{ m: "15px 0 5px 20px" }}
+            >
+              Lists
+            </Typography>
             <Item 
               title="Project"
               to="/project"
@@ -149,6 +165,15 @@ const Sidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
+            
+            <Typography
+              variant='h6'
+              color={colors.grey[300]}
+              sx={{ m: "15px 0 5px 20px" }}
+            >
+              Services
+            </Typography>
+
             <Item 
               title="Message"
               to="/message"
