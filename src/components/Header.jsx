@@ -32,10 +32,9 @@ const Header = ({ title, subtitle, button }) => {
           </Typography>
         </Box>
         
-        
-        <Box>
+        {button == null ? ''
+        : <Box>
           <Button
-            variant="contained" 
             style={{
               color: colors.blueAccent[300],
               border: `2px solid ${colors.blueAccent[300]}`,
@@ -46,6 +45,7 @@ const Header = ({ title, subtitle, button }) => {
             {button}
           </Button>
         </Box>
+        }
       </Box>
     </Box>
 
