@@ -35,7 +35,7 @@ const Sidebar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false); //Represent where the sidebar will collapse or not.
-  const [selected, setSelected] = useState("Dashboard"); //Determine what page we select and currently at. (Dashboard) as the default
+  const [selected, setSelected] = useState(); //Determine what page we select and currently at. (Dashboard) as the default
   
   return (
     <Box
