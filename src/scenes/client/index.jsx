@@ -5,7 +5,7 @@ import Header from '../../components/Header';
 const Client = () => {
   return (
     <Box m="20px">
-      <Header title="CLIENTS" subtitle="View and Manage Clients" button="ADD CLIENT"/>
+      <Header title="CLIENTS" subtitle="View and Manage Clients" button="ADD CLIENT" link="/client/newClient"/>
     </Box>
   )
 }
