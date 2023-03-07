@@ -4,12 +4,18 @@ import { CssBaseline, ThemeProvider } from '@mui/material'
 import { Routes, Route } from 'react-router-dom';
 import './index.css'
 
-
 //Link Webpage for Router
 import Board from './scenes/board';
 import Project from './scenes/project';
+
 import Team from './scenes/team';
+import SingleTeam from './scenes/team/singleTeam';
+import NewTeam from './scenes/team/newTeam';
+
 import Client from './scenes/client';
+import SingleClient from './scenes/client/SingleClient';
+import NewClient from './scenes/client/NewClient';
+
 import Message from './scenes/message';
 import Calendar from './scenes/calendar';
 
@@ -33,8 +39,16 @@ function App() {
             <Routes>
               <Route path='/' element={<Board/>}/>
               <Route path='/project' element={<Project/>}/>
-              <Route path='/team' element={<Team/>}/>
-              <Route path='/client' element={<Client/>}/>
+              <Route path='/team'>
+                <Route index element={<Team/>}/>
+                <Route path=':teamId' element={<SingleTeam/>}/>
+                <Route path='newTeam' element={<NewTeam/>}/>
+              </Route>
+              <Route path='/client' >
+                <Route index element={<Client/>}/>
+                <Route path=':clientId' element={<SingleClient/>}/>
+                <Route path='newClient' element={<NewClient/>}/>
+              </Route>
               <Route path='/message' element={<Message/>}/>
               <Route path='/calendar' element={<Calendar/>}/>
             </Routes>
