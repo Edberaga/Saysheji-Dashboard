@@ -1,10 +1,13 @@
 import React from 'react'
+import Header from '../../components/Header'
 import './singleTeam.css'
 
-const singleTeam = () => {
+const SingleTeam = () => {
   return (
-    <div>singleTeam</div>
+    <>
+    <Header title='Add New Team'/>
+    </>
   )
 }
 
-export default singleTeam
+export default SingleTeam
