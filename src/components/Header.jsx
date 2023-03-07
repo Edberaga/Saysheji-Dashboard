@@ -3,8 +3,9 @@ import { Typography, Box, useTheme, Button } from '@mui/material';
 import { tokens } from '../theme';
 import { padding } from '@mui/system';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import { Link } from 'react-router-dom';
 
-const Header = ({ title, subtitle, button }) => {
+const Header = ({ title, subtitle, button, link }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   
@@ -34,16 +35,18 @@ const Header = ({ title, subtitle, button }) => {
         
         {button == null ? ''
         : <Box>
-          <Button
-            style={{
-              color: colors.blueAccent[300],
-              border: `2px solid ${colors.blueAccent[300]}`,
-              padding: '5px 15px',
-            }}
-            startIcon={<PersonAddIcon/>}
-          >
-            {button}
-          </Button>
+          <Link to={link}>
+            <Button
+              style={{
+                color: colors.blueAccent[300],
+                border: `2px solid ${colors.blueAccent[300]}`,
+                padding: '5px 15px',
+              }}
+              startIcon={<PersonAddIcon/>}
+            >
+              {button}
+            </Button>
+          </Link>
         </Box>
         }
       </Box>
