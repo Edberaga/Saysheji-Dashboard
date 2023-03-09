@@ -9,8 +9,8 @@ import Board from './scenes/board';
 import Project from './scenes/project';
 
 import Team from './scenes/team';
-import SingleTeam from './scenes/team/singleTeam';
-import NewTeam from './scenes/team/newTeam';
+import SingleTeam from './scenes/team/SingleTeam';
+import NewTeam from './scenes/team/NewTeam';
 
 import Client from './scenes/client';
 import SingleClient from './scenes/client/SingleClient';
