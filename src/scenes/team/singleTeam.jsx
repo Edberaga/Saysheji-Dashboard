@@ -1,11 +1,13 @@
 import React from 'react'
 import Header from '../../components/Header'
-import './singleTeam.css'
+import './SingleTeam.css'
 
 const SingleTeam = () => {
   return (
     <>
-    <Header title='Add New Team'/>
+    <div>
+      Single page Team
+    </div>
     </>
   )
 }
