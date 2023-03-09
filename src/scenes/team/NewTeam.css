@@ -1,0 +1,21 @@
+.form-container{
+    display: flex;
+    box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+    padding: 10px;
+}
+
+.left-form{
+    flex: 1;
+    text-align: center;
+}
+
+.left-form img{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.right-form{
+    flex: 2;
+}
