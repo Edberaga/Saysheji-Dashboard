@@ -32,33 +32,27 @@ const Team = () => {
       }
     },
     {
-      field: 'age',
-      headerName: 'Age',
-      width: 90,
-      type: "number",
-      align: "left",
-      headerAlign: "left",
-      editable: true,
+      field: 'team',
+      headerName: 'Team',
+      width: 120,
     },
     {
       field: 'phone',
       headerName: 'Phone Number',
-      width: 150,
+      width: 130,
       type: "number",
       align: "left",
       headerAlign: "left",
-      editable: true,
     },
     {
       field: 'email',
       headerName: 'Email',
       width: 210,
-      editable: true,
     },
     {
       field: 'task',
       headerName: 'Current Task',
-      width: 230,
+      width: 210,
       sortable: false,
     },
     {
@@ -141,7 +135,6 @@ const Team = () => {
           pageSize={9}
           rowsPerPageOptions={[9]}
           disableSelectionOnClick
-          experimentalFeatures={{ newEditingApi: true }}
         />
       </Box>
     </Box>
