@@ -10,6 +10,11 @@ body,
   font-family: 'Poppins', sans-serif;
 }
 
+:root{
+  --primary-color: #60c5ff;
+  --second-color: #fcfcfc;
+}
+
 .app{
   display: flex;
   position: relative;
