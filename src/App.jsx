@@ -20,6 +20,7 @@ import Message from './scenes/message';
 import Calendar from './scenes/calendar';
 
 //Global components
+import Login from './scenes/login';
 import Sidebar from './scenes/global/Sidebar';
 import { Topbar } from './scenes/global/Topbar';
 
@@ -31,12 +32,12 @@ function App() {
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-
         <div className="app">
           <Sidebar/>
           <main className="content">
             <Topbar/>
             <Routes>
+              <Route path='/login' element={<Login/>}/>
               <Route path='/' element={<Board/>}/>
               <Route path='/project' element={<Project/>}/>
               <Route path='/team'>
@@ -54,7 +55,6 @@ function App() {
             </Routes>
           </main>
         </div>
-
       </ThemeProvider>
     </ColorModeContext.Provider>
     </>
