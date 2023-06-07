@@ -1,7 +1,7 @@
-import { useState } from 'react'
+import { useState} from 'react'
 import { ColorModeContext, useMode } from './theme'
 import { CssBaseline, ThemeProvider } from '@mui/material'
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import './index.css'
 
 //Link Webpage for Router
@@ -21,11 +21,17 @@ import Calendar from './scenes/calendar';
 
 //Global components
 import Login from './scenes/login';
-import Sidebar from './scenes/global/Sidebar';
-import { Topbar } from './scenes/global/Topbar';
 
 function App() {
   const [theme, colorMode] = useMode();
+
+  const currentUser = true;
+
+  const RequireAuth = ({children}) => {
+    return currentUser ? (children) : <Navigate to="/login"/>
+  };
+
+  console.log(currentUser);
 
   return (
     <>
@@ -33,27 +39,23 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="app">
-          <Sidebar/>
-          <main className="content">
-            <Topbar/>
-            <Routes>
-              <Route path='/login' element={<Login/>}/>
-              <Route path='/' element={<Board/>}/>
-              <Route path='/project' element={<Project/>}/>
-              <Route path='/team'>
-                <Route index element={<Team/>}/>
-                <Route path=':teamId' element={<SingleTeam/>}/>
-                <Route path='newTeam' element={<NewTeam/>}/>
-              </Route>
-              <Route path='/client' >
-                <Route index element={<Client/>}/>
-                <Route path=':clientId' element={<SingleClient/>}/>
-                <Route path='newClient' element={<NewClient/>}/>
-              </Route>
-              <Route path='/message' element={<Message/>}/>
-              <Route path='/calendar' element={<Calendar/>}/>
-            </Routes>
-          </main>
+          <Routes>
+            <Route path='/' element={<RequireAuth><Board/></RequireAuth>}/>
+            <Route path='/login' element={<Login/>}/>
+            <Route path='/project' element={<RequireAuth><Project/></RequireAuth>}/>
+            <Route path='/team'>
+              <Route index element={<RequireAuth><Team/></RequireAuth>}/>
+              <Route path=':teamId' element={<SingleTeam/>}/>
+              <Route path='newTeam' element={<NewTeam/>}/>
+            </Route>
+            <Route path='/client' >
+              <Route index element={<RequireAuth> <Client/> </RequireAuth>}/>
+              <Route path=':clientId' element={<SingleClient/>}/>
+              <Route path='newClient' element={<NewClient/>}/>
+            </Route>
+            <Route path='/message' element={<RequireAuth> <Message/> </RequireAuth>}/>
+            <Route path='/calendar' element={<RequireAuth> <Calendar/> </RequireAuth>}/>
+          </Routes>
         </div>
       </ThemeProvider>
     </ColorModeContext.Provider>
