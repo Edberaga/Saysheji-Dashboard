@@ -15,6 +15,8 @@ import {
 } from "@mui/material";
 import Header from "../../components/Header";
 import { tokens } from "../../theme";
+import Sidebar from '../global/Sidebar';
+import { Topbar } from '../global/Topbar';
 import './style.css'
 
 const Calendar = () => {
@@ -49,7 +51,11 @@ const Calendar = () => {
   };
 
   return (
-    <Box m="20px">
+    <>
+    <Sidebar/>
+    <main className="content">
+      <Topbar/>
+      <Box m="20px">
       <Header title="Calendar" subtitle="Full Calendar Interactive Page" />
 
       <Box display="flex" justifyContent="space-between">
@@ -127,6 +133,9 @@ const Calendar = () => {
         </Box>
       </Box>
     </Box>
+    </main>
+    </>
+    
   );
 };
 

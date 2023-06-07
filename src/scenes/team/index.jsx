@@ -9,6 +9,8 @@ import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 
 import * as React from 'react';
 import Header from '../../components/Header';
+import Sidebar from '../global/Sidebar';
+import { Topbar } from '../global/Topbar';
 import './index.css'
 
 const Team = () => {
@@ -123,8 +125,11 @@ const Team = () => {
   ];
 
   return (
-    <> 
-    <Box m="20px">
+    <>
+    <Sidebar/>
+    <main className="content">
+      <Topbar/>
+      <Box m="20px">
       <Header title="TEAMS" subtitle="View your Workplace teams here and they current task" button="New User" link="/team/newTeam"/>
 
       {/*DATA TABLE */}
@@ -138,6 +143,7 @@ const Team = () => {
         />
       </Box>
     </Box>
+    </main>
     </>
   )
 }
