@@ -9,7 +9,7 @@ import { getAuth } from "firebase/auth";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_FIREBASE_KEY,
+  apiKey: "AIzaSyCDEhcgsi-mKs9f4dV93tZjgOcfAewKCNI",
   authDomain: "crm-by-ssj.firebaseapp.com",
   projectId: "crm-by-ssj",
   storageBucket: "crm-by-ssj.appspot.com",
@@ -20,5 +20,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-export const auth = getAuth();
 const analytics = getAnalytics(app);
+
+// Initialize Firebase Authentication and get a reference to the service
+export const auth = getAuth(app);
