@@ -1,10 +1,13 @@
-import { React, useState }from 'react'
+import { React, useState, useEffect }from 'react'
 import { ProSidebar, Menu, MenuItem  } from 'react-pro-sidebar';
 import 'react-pro-sidebar/dist/css/styles.css';
 import { Box, IconButton, Typography, useTheme } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { tokens } from '../../theme';
 import userProfile from '../../assets/img/user-profile.jpg'
+import { auth } from '../../firebase';
+import { useAuthState} from 'react-firebase-hooks/auth';
+import { signOut } from 'firebase/auth';
 
 //MUI Icons
 import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
@@ -32,6 +35,8 @@ const Item = ({title, to, icon, selected, setSelected}) => {
 }
 
 const Sidebar = () => {
+  const [user] = useAuthState(auth);
+
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false); //Represent where the sidebar will collapse or not.
@@ -101,13 +106,15 @@ const Sidebar = () => {
               </Box>
 
               <Box textAlign="center">
+              {user && (
+                <>
                 <Typography
-                  variant='h5'
+                  variant='h6'
                   color={colors.grey[100]}
-                  fontWeight="600"
+                  fontWeight="400"
                   sx={{ m: "10px 0 0 0"}}
                 >
-                  User Name
+                  {user.email}
                 </Typography>
                 <Typography 
                   variant='h6' 
@@ -115,6 +122,8 @@ const Sidebar = () => {
                 >
                   User Position
                 </Typography>
+                </>
+              )}
               </Box>
             </Box>
           )}
@@ -188,6 +197,15 @@ const Sidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
+          </Box>
+          <Box 
+            style={{
+              cursor: "pointer",
+              margin: "5% 0 0 15%",
+            }}
+            onClick={()=>{signOut(auth)}}
+          >
+          Logout
           </Box>
         </Menu>
       </ProSidebar>
