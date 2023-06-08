@@ -21,17 +21,19 @@ import Calendar from './scenes/calendar';
 
 //Global components
 import Login from './scenes/login';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from './firebase';
 
 function App() {
   const [theme, colorMode] = useMode();
 
-  const currentUser = true;
+  const [user] = useAuthState(auth);
 
   const RequireAuth = ({children}) => {
-    return currentUser ? (children) : <Navigate to="/login"/>
+    return user ? (children) : <Navigate to="/login"/>
   };
 
-  console.log(currentUser);
+  console.log(user);
 
   return (
     <>
