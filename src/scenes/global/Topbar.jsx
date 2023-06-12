@@ -11,6 +11,8 @@ import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
 import SearchIcon from '@mui/icons-material/Search';
+import Team from '../team';
+import { Link } from 'react-router-dom';
 
 export const Topbar = () => {
   const theme = useTheme();
@@ -42,7 +44,18 @@ export const Topbar = () => {
         
         <IconButton> <NotificationsOutlinedIcon/> </IconButton>
         <IconButton> <SettingsOutlinedIcon/> </IconButton>
-        <IconButton> <PersonOutlinedIcon/> </IconButton>
+        {/*Account Profile */}
+        <IconButton title='Edit profile'> 
+          <Link 
+          
+          to='/team' 
+          style={{
+            color: colors.grey[100],
+          }}
+          >
+            <PersonOutlinedIcon/>
+          </Link> 
+        </IconButton>
       </Box>
     </Box>
   )
