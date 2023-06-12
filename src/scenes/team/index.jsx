@@ -130,7 +130,7 @@ const Team = () => {
     <main className="content">
       <Topbar/>
       <Box m="20px">
-      <Header title="TEAMS" subtitle="View your Workplace teams here and they current task" button="New User" link="/team/newTeam"/>
+      <Header title="TEAMS" subtitle="View your Workplace teams here and they current task" button="Add User" link="/team/newTeam"/>
 
       {/*DATA TABLE */}
       <Box m="20px 0 0 0" height="75vh" sx={{  width: '100%' }}>
