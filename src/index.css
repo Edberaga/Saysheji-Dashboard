@@ -20,6 +20,10 @@ body,
   position: relative;
 }
 
+a {
+  color: none;
+}
+
 /*Scrollbar Styling*/
 
 ::-webkit-scrollbar {
