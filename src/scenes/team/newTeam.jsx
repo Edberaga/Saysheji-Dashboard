@@ -1,26 +1,72 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Header from '../../components/Header'
 import './NewTeam.css'
 import Sidebar from '../global/Sidebar'
 import { Topbar } from '../global/Topbar'
 import { Box } from '@mui/material'
 
-import { doc, serverTimestamp, setDoc } from 'firebase/firestore'
-import { async } from "@firebase/util"
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth, db } from '../../firebase'
+import { doc, serverTimestamp, setDoc } from 'firebase/firestore';
+import { async } from "@firebase/util";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { auth, db, storage } from '../../firebase';
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { useNavigate } from 'react-router-dom'
 
 const NewTeam = () => {
   const [file, setFile] = useState("");
   const [data, setData] = useState({});
+  //Declare percentage to measure the image process
+  const [per, setPer] = useState(null);
+
+  //to use react router navigation
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const uploadFile = () => {
+      /*To make the uploaded photo with name of timestamp, so it doesnt overwrite with file that has same name */
+      const name = new Date().getTime() + file.name;
+      const storageRef = ref(storage, name);
+      const uploadTask = uploadBytesResumable(storageRef, file);
+
+      uploadTask.on('state_changed', 
+        (snapshot) => {
+          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log('Upload is ' + progress + '% done');
+          setPer(progress);
+          switch (snapshot.state) {
+            case 'paused':
+              console.log('Upload is paused');
+              break;
+            case 'running':
+              console.log('Upload is running');
+              break;
+            default:
+              break;
+            }
+          }, 
+          (error) => {
+            console.log(error);
+          }, 
+          () => {
+            // Handle successful uploads on complete
+              getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                console.log('File available at', downloadURL);
+                setData((prev) =>({...prev, img:downloadURL}))
+            });
+          }
+        );
+    };
+    /*If there's upload file, will call the function uploadFile() */
+    file && uploadFile();
+  }, [file]);
 
   const handleInput = (e) => {
     const id = e.target.id;
     const value = e.target.value;
 
     setData({...data, [id]:value});
-    console.log(data);
   };
+  console.log(data);
   
   const handleAdd = async(e) => {
     e.preventDefault();
@@ -31,12 +77,18 @@ const NewTeam = () => {
         data.email,
         data.password
       );
+      updateProfile(auth.currentUser, {
+        displayName: data.username,
+        photoURL: data.img,
+        phoneNumber: data.phone,
+      });
 
       /*This will add the rest data, to the Firestore "User" doc*/
-      await setDoc(doc(db, "team", res.user.email), {
+      await setDoc(doc(db, "team", res.user.uid), {
         ...data,
         timeStamp: serverTimestamp(),
       });
+      navigate(-1);
     }catch(err){
       console.log(err);
     }
@@ -53,7 +105,10 @@ const NewTeam = () => {
     {/*Form Container */}
     <section className="form-container">
       <section className="left-form">
-        <img src="https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg" 
+        <img 
+        src={
+          file ? URL.createObjectURL(file)
+          :"https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg" }
         alt="Insert photo"
         />
       </section>
@@ -64,7 +119,11 @@ const NewTeam = () => {
             <label htmlFor="photoUrl">
               Image
             </label>
-            <input type="file" id='photoUrl'/>
+            <input 
+              type="file" 
+              id='photoUrl'
+              onChange={(e) => setFile(e.target.files[0])}
+            />
           </div>
 
           <div className="formInput" key="username">
@@ -145,7 +204,7 @@ const NewTeam = () => {
             </select>
           </div>
           <br/>
-          <button type='submit' className='formSubmit'>Create Team</button>
+          <button disabled={per !== null && per < 100} type='submit' className='formSubmit'>Create Team</button>
         </form>
       </section>
     </section>
