@@ -13,9 +13,43 @@ import Sidebar from '../global/Sidebar';
 import { Topbar } from '../global/Topbar';
 import './index.css'
 
+import { useEffect, useState } from 'react';
+import { collection, getDocs, deleteDoc } from "firebase/firestore";
+import { db } from '../../firebase';
+
 const Team = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async() => {
+      let list = []
+      try{
+        const querySnapshot = await getDocs(collection(db, "team"));
+        querySnapshot.forEach((doc) => {
+          list.push({ id:doc.id, ...doc.data()});
+          // doc.data() is never undefined for query doc snapshots
+          console.log(doc.id, " => ", doc.data());
+        });
+        setData(list);
+      }
+      catch(error){
+        console.log(error);
+      }
+    };
+    fetchData();
+  },[]);
+
+  const handleDelete = async (id) => {
+    try {
+      await deleteDoc(doc(db, "team", id));
+    }catch(error) {
+      console.log(error);
+    }
+    setData(data.filter((item) => item.id !== id));
+  };
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 50 },
@@ -28,7 +62,7 @@ const Team = () => {
         return(
           <div className="cellRender">
             <img src={params.row.img} alt="avatar" className="cellImg" />
-            {params.row.name}
+            {params.row.username}
           </div>
         )
       }
@@ -135,7 +169,7 @@ const Team = () => {
       {/*DATA TABLE */}
       <Box m="20px 0 0 0" height="75vh" sx={{  width: '100%' }}>
         <DataGrid
-          rows={mockDataTeam}
+          rows={data}
           columns={columns}
           pageSize={9}
           rowsPerPageOptions={[9]}
