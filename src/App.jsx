@@ -26,14 +26,11 @@ import { auth } from './firebase';
 
 function App() {
   const [theme, colorMode] = useMode();
-
   const [user] = useAuthState(auth);
 
   const RequireAuth = ({children}) => {
     return user ? (children) : <Navigate to="/login"/>
   };
-
-  console.log(user);
 
   return (
     <>
