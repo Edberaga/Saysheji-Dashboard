@@ -4,8 +4,7 @@ import 'react-pro-sidebar/dist/css/styles.css';
 import { Box, IconButton, Typography, useTheme } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { tokens } from '../../theme';
-import userProfile from '../../assets/img/user-profile.jpg'
-import { auth } from '../../firebase';
+import { auth, db } from '../../firebase';
 import { useAuthState} from 'react-firebase-hooks/auth';
 import { signOut } from 'firebase/auth';
 
@@ -17,6 +16,7 @@ import AssignmentIndOutlinedIcon from '@mui/icons-material/AssignmentIndOutlined
 import ForumOutlinedIcon from '@mui/icons-material/ForumOutlined';
 import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
+import { doc, getDoc } from 'firebase/firestore';
 
 const Item = ({title, to, icon, selected, setSelected}) => {
   const theme = useTheme();
@@ -36,9 +36,26 @@ const Item = ({title, to, icon, selected, setSelected}) => {
 
 const Sidebar = () => {
   const [user] = useAuthState(auth);
+  const [data, setData] = useState("");
 
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const photoURL = user.photoURL;
+
+  {useEffect(() => {
+    const getPosition = async() => {
+      try{
+        const docRef = doc(db, "team", user.uid);
+        const docSnap = await getDoc(docRef);
+        setData(docSnap.data());
+      }
+      catch(error){
+        console.log(error);
+      }
+    };
+    getPosition();
+  });}
+
   const [isCollapsed, setIsCollapsed] = useState(false); //Represent where the sidebar will collapse or not.
   const [selected, setSelected] = useState(); //Determine what page we select and currently at. (Dashboard) as the default
   
@@ -95,11 +112,10 @@ const Sidebar = () => {
                 alt="profile-user"
                 width="100px"
                 height="100px"
-                src={userProfile}
                 style={{
                   cursor: "pointer", 
                   borderRadius: "50%",
-                  backgroundImage: `url(${userProfile})`,
+                  backgroundImage: `url(${photoURL})`,
                   backgroundSize: 'cover',
                 }}
                 />
@@ -114,13 +130,13 @@ const Sidebar = () => {
                   fontWeight="400"
                   sx={{ m: "10px 0 0 0"}}
                 >
-                  {user.email}
+                  {user.displayName}
                 </Typography>
                 <Typography 
                   variant='h6' 
                   color={colors.blueAccent[500]}
                 >
-                  User Position
+                  {data.position}
                 </Typography>
                 </>
               )}
