@@ -14,7 +14,7 @@ import { Topbar } from '../global/Topbar';
 import './index.css'
 
 import { useEffect, useState } from 'react';
-import { collection, getDocs, deleteDoc } from "firebase/firestore";
+import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 import { db } from '../../firebase';
 
 const Team = () => {
@@ -143,6 +143,7 @@ const Team = () => {
 
             <Button 
               variant="outlined"
+              onClick={handleDelete}
               style={{
                 color: colors.redAccent[500],
                 border: `1px solid ${colors.redAccent[500]}`,
