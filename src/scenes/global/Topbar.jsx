@@ -34,7 +34,7 @@ export const Topbar = () => {
       </Box>
       {/*ICONS */}
       <Box display="flex">
-        <IconButton onClick={colorMode.toggleColorMode}> 
+        <IconButton title='Toogle Light' onClick={colorMode.toggleColorMode}> 
           {theme.palette.mode === "dark" ? (
             <DarkModeOutlinedIcon />
           ) : (
@@ -42,12 +42,11 @@ export const Topbar = () => {
           )}
         </IconButton>
         
-        <IconButton> <NotificationsOutlinedIcon/> </IconButton>
-        <IconButton> <SettingsOutlinedIcon/> </IconButton>
+        <IconButton title='Notification'> <NotificationsOutlinedIcon/> </IconButton>
+        <IconButton title='Setting'> <SettingsOutlinedIcon/> </IconButton>
         {/*Account Profile */}
         <IconButton title='Edit profile'> 
           <Link 
-          
           to='/team' 
           style={{
             color: colors.grey[100],
