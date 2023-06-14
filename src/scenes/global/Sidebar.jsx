@@ -218,6 +218,7 @@ const Sidebar = () => {
             style={{
               cursor: "pointer",
               margin: "5% 0 0 15%",
+              color: "red"
             }}
             onClick={()=>{signOut(auth)}}
           >
