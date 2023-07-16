@@ -14,7 +14,8 @@ import { Topbar } from '../global/Topbar';
 import './index.css'
 
 import { useEffect, useState } from 'react';
-import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
+import { collection, getDocs, deleteDoc, doc, where, query } from "firebase/firestore";
+import { deleteUser } from 'firebase/auth';
 import { db } from '../../firebase';
 
 const Team = () => {
@@ -27,7 +28,12 @@ const Team = () => {
     const fetchData = async() => {
       let list = []
       try{
-        const querySnapshot = await getDocs(collection(db, "team"));
+        const q = query(
+          collection(db, "team"), 
+          where("role", "==", "Team")
+        );
+        const querySnapshot = await getDocs(q);
+
         querySnapshot.forEach((doc) => {
           list.push({ id:doc.id, ...doc.data()});
           // doc.data() is never undefined for query doc snapshots
@@ -42,13 +48,17 @@ const Team = () => {
     fetchData();
   },[]);
 
-  const handleDelete = async (id) => {
-    try {
-      await deleteDoc(doc(db, "team", id));
-    }catch(error) {
-      console.log(error);
-    }
-    setData(data.filter((item) => item.id !== id));
+  const handleDelete = async (email) => {
+     //use window confirm to consider Admin to delete the article or not.
+     if(window.confirm("Are you sure you want to delete this Article?")) {
+      try {
+        await deleteDoc(doc(db, "team", email));
+        setData(data.filter((item) => item.email !== email));
+        deleteUser(email);
+      } catch(error) {
+        console.log(error);
+      }
+     };
   };
 
   const columns = [
@@ -127,7 +137,7 @@ const Team = () => {
       headerName: 'Action',
       sortable: false,
       width: 220,
-      renderCell: () => {
+      renderCell: (params) => {
         return(
           <div className="cellRender">
             <Button 
@@ -143,7 +153,7 @@ const Team = () => {
 
             <Button 
               variant="outlined"
-              onClick={handleDelete}
+              onClick={() => handleDelete(params.row.email)}
               style={{
                 color: colors.redAccent[500],
                 border: `1px solid ${colors.redAccent[500]}`,
