@@ -45,7 +45,7 @@ const Sidebar = () => {
   {useEffect(() => {
     const getPosition = async() => {
       try{
-        const docRef = doc(db, "team", user.uid);
+        const docRef = doc(db, "team", user.email);
         const docSnap = await getDoc(docRef);
         setData(docSnap.data());
       }
