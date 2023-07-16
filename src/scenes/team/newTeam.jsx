@@ -84,11 +84,13 @@ const NewTeam = () => {
       });
 
       /*This will add the rest data, to the Firestore "User" doc*/
-      await setDoc(doc(db, "team", res.user.uid), {
+      await setDoc(doc(db, "team", res.user.email), {
         ...data,
         timeStamp: serverTimestamp(),
+        role: "Team",
       });
       navigate(-1);
+      
     }catch(err){
       console.log(err);
     }
