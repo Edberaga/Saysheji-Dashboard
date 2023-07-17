@@ -40,7 +40,6 @@ const Sidebar = () => {
 
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const photoURL = user.photoURL;
 
   {useEffect(() => {
     const getPosition = async() => {
@@ -110,12 +109,13 @@ const Sidebar = () => {
               <Box display="flex" justifyContent="center" alignItems="center">
                 <Box
                 alt="profile-user"
+                className="sidebar-box"
                 width="100px"
                 height="100px"
                 style={{
                   cursor: "pointer", 
                   borderRadius: "50%",
-                  backgroundImage: `url(${photoURL})`,
+                  backgroundImage: `url(${data.img})`,
                   backgroundSize: 'cover',
                 }}
                 />
