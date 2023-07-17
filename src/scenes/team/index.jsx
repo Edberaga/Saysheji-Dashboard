@@ -15,7 +15,6 @@ import './index.css'
 
 import { useEffect, useState } from 'react';
 import { collection, getDocs, deleteDoc, doc, where, query } from "firebase/firestore";
-import { deleteUser } from 'firebase/auth';
 import { db } from '../../firebase';
 
 const Team = () => {
@@ -50,11 +49,10 @@ const Team = () => {
 
   const handleDelete = async (email) => {
      //use window confirm to consider Admin to delete the article or not.
-     if(window.confirm("Are you sure you want to delete this Article?")) {
+     if(window.confirm("Are you sure you want to delete this User?")) {
       try {
         await deleteDoc(doc(db, "team", email));
         setData(data.filter((item) => item.email !== email));
-        deleteUser(email);
       } catch(error) {
         console.log(error);
       }
@@ -62,7 +60,6 @@ const Team = () => {
   };
 
   const columns = [
-    { field: 'id', headerName: 'ID', width: 50 },
     {
       field: 'user',
       headerName: 'Members',
@@ -129,41 +126,6 @@ const Team = () => {
               {status}
             </Typography>
           </Box>
-        )
-      }
-    },
-    {
-      field: 'action',
-      headerName: 'Action',
-      sortable: false,
-      width: 220,
-      renderCell: (params) => {
-        return(
-          <div className="cellRender">
-            <Button 
-              variant="outlined"
-              style={{
-                color: colors.grey[100],
-                border: `1px solid ${colors.grey[100]}`
-              }}
-              startIcon ={<RemoveRedEyeOutlinedIcon/>}
-            >
-              View
-            </Button>
-
-            <Button 
-              variant="outlined"
-              onClick={() => handleDelete(params.row.email)}
-              style={{
-                color: colors.redAccent[500],
-                border: `1px solid ${colors.redAccent[500]}`,
-                margin: '0 0 0 15px'
-              }}
-              startIcon ={<DeleteOutlinedIcon />}
-            >
-              Delete
-            </Button>
-          </div>
         )
       }
     },
