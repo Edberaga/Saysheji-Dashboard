@@ -42,9 +42,9 @@ const Sidebar = () => {
   const colors = tokens(theme.palette.mode);
 
   {useEffect(() => {
-    const getPosition = async() => {
+    const getUserData = async() => {
       try{
-        const docRef = doc(db, "team", user.email);
+        const docRef = doc(db, "users", user.email);
         const docSnap = await getDoc(docRef);
         setData(docSnap.data());
       }
@@ -52,7 +52,7 @@ const Sidebar = () => {
         console.log(error);
       }
     };
-    getPosition();
+    getUserData();
   });}
 
   const [isCollapsed, setIsCollapsed] = useState(false); //Represent where the sidebar will collapse or not.

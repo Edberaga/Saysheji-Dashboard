@@ -81,9 +81,10 @@ const NewClient = () => {
       });
 
       /*This will add the rest data, to the Firestore "User" doc*/
-      await setDoc(doc(db, "team", res.user.uid), {
+      await setDoc(doc(db, "users", res.user.uid), {
         ...data,
         timeStamp: serverTimestamp(),
+        role: "Client",
       });
       navigate(-1);
     }catch(err){

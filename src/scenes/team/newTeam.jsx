@@ -84,7 +84,7 @@ const NewTeam = () => {
       });
 
       /*This will add the rest data, to the Firestore "User" doc*/
-      await setDoc(doc(db, "team", res.user.email), {
+      await setDoc(doc(db, "users", res.user.email), {
         ...data,
         timeStamp: serverTimestamp(),
         role: "Team",
@@ -159,8 +159,8 @@ const NewTeam = () => {
           </div>
 
           <div className="formInput" key="team">
-            <label htmlFor="team">Team</label>
-            <select id="team" onChange={handleInput}>
+            <label htmlFor="departement">Team</label>
+            <select id="departement" onChange={handleInput}>
               <option>Select the Team</option>
               <option value="Business">Business</option>
               <option value="IT">IT</option>
