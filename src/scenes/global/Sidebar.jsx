@@ -54,6 +54,7 @@ const Sidebar = () => {
     };
     getUserData();
   });}
+  console.log("Data: ", data);
 
   const [isCollapsed, setIsCollapsed] = useState(false); //Represent where the sidebar will collapse or not.
   const [selected, setSelected] = useState(); //Determine what page we select and currently at. (Dashboard) as the default
@@ -130,7 +131,7 @@ const Sidebar = () => {
                   fontWeight="400"
                   sx={{ m: "10px 0 0 0"}}
                 >
-                  {user.displayName}
+                  {data.username}
                 </Typography>
                 <Typography 
                   variant='h6' 
