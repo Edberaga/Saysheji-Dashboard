@@ -28,7 +28,7 @@ const Team = () => {
       let list = []
       try{
         const q = query(
-          collection(db, "team"), 
+          collection(db, "users"), 
           where("role", "==", "Team")
         );
         const querySnapshot = await getDocs(q);
@@ -51,7 +51,7 @@ const Team = () => {
      //use window confirm to consider Admin to delete the article or not.
      if(window.confirm("Are you sure you want to delete this User?")) {
       try {
-        await deleteDoc(doc(db, "team", email));
+        await deleteDoc(doc(db, "users", email));
         setData(data.filter((item) => item.email !== email));
       } catch(error) {
         console.log(error);
@@ -75,8 +75,8 @@ const Team = () => {
       }
     },
     {
-      field: 'team',
-      headerName: 'Team',
+      field: 'departement',
+      headerName: 'Departement',
       width: 120,
     },
     {
