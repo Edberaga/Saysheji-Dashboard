@@ -88,6 +88,7 @@ const NewTeam = () => {
         ...data,
         timeStamp: serverTimestamp(),
         role: "Team",
+        id: res.user.uid,
       });
       navigate(-1);
       
