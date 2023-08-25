@@ -1,11 +1,6 @@
 import { Box, Typography, useTheme, Button } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import { tokens } from '../../theme';
-import { mockDataTeam } from "../../data/mockData";
-
-import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
-import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined';
-import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 
 import * as React from 'react';
 import Header from '../../components/Header';
