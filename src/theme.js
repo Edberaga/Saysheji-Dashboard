@@ -115,8 +115,7 @@ export const tokens = (mode) => ({
             800: "#afe2ff",
             900: "#d7f0ff",
         },
-    }
-    )
+    })
 })
 
 //mui theme settings
