@@ -54,7 +54,6 @@ const Sidebar = () => {
     };
     getUserData();
   });}
-  console.log("Data: ", data);
 
   const [isCollapsed, setIsCollapsed] = useState(false); //Represent where the sidebar will collapse or not.
   const [selected, setSelected] = useState(); //Determine what page we select and currently at. (Dashboard) as the default
