@@ -36,12 +36,12 @@ const Item = ({title, to, icon, selected, setSelected}) => {
 
 const Sidebar = () => {
   const [user] = useAuthState(auth);
-  const [data, setData] = useState("");
+  const [data, setData] = useState([]);
 
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-  {useEffect(() => {
+  useEffect(() => {
     const getUserData = async() => {
       try{
         const docRef = doc(db, "users", user.email);
@@ -53,7 +53,7 @@ const Sidebar = () => {
       }
     };
     getUserData();
-  });}
+  },[]);
 
   const [isCollapsed, setIsCollapsed] = useState(false); //Represent where the sidebar will collapse or not.
   const [selected, setSelected] = useState(); //Determine what page we select and currently at. (Dashboard) as the default
