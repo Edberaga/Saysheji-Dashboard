@@ -28,33 +28,32 @@ function App() {
   const [theme, colorMode] = useMode();
   const [user] = useAuthState(auth);
 
-  const RequireAuth = ({children}) => {
-    return user ? (children) : <Navigate to="/login"/>
-  };
-
   return (
     <>
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="app">
+          {user ? 
           <Routes>
-            <Route path='/' element={<RequireAuth><Board/></RequireAuth>}/>
+            <Route path='/' element={<Board/>}/>
             <Route path='/login' element={<Login/>}/>
-            <Route path='/project' element={<RequireAuth><Project/></RequireAuth>}/>
+            <Route path='/project' element={<Project/>}/>
             <Route path='/team'>
-              <Route index element={<RequireAuth><Team/></RequireAuth>}/>
+              <Route index element={<Team/>}/>
               <Route path=':teamId' element={<SingleTeam/>}/>
               <Route path='newTeam' element={<NewTeam/>}/>
             </Route>
             <Route path='/client' >
-              <Route index element={<RequireAuth> <Client/> </RequireAuth>}/>
+              <Route index element={<Client/>}/>
               <Route path=':clientId' element={<SingleClient/>}/>
               <Route path='newClient' element={<NewClient/>}/>
             </Route>
-            <Route path='/message' element={<RequireAuth> <Message/> </RequireAuth>}/>
-            <Route path='/calendar' element={<RequireAuth> <Calendar/> </RequireAuth>}/>
+            <Route path='/message' element={<Message/>}/>
+            <Route path='/calendar' element={ <Calendar/>}/>
           </Routes>
+          : <Navigate to="/login"/>
+          }
         </div>
       </ThemeProvider>
     </ColorModeContext.Provider>
