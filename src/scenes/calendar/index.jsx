@@ -52,7 +52,7 @@ const Calendar = () => {
 
   return (
     <>
-    <Sidebar/>
+    
     <main className="content">
       <Topbar/>
       <Box m="20px">

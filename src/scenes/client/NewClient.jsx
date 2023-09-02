@@ -94,7 +94,6 @@ const NewClient = () => {
 
   return (
   <>
-  <Sidebar/>
   <main className="content">
   <Topbar/>
   <Box m="20px">

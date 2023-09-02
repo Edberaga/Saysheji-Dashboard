@@ -7,7 +7,6 @@ import { Topbar } from '../global/Topbar';
 const Board = () => {
   return (
     <>
-    <Sidebar/>
     <main className="content">
       <Topbar/>
       <Box m="20px">
