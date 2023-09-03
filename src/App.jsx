@@ -23,6 +23,7 @@ import Calendar from './scenes/calendar';
 import Login from './scenes/login';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from './firebase';
+import Sidebar from './scenes/global/Sidebar';
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -34,10 +35,11 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="app">
-          {user ? 
+          {user ?
+          <>
+          <Sidebar/>
           <Routes>
             <Route path='/' element={<Board/>}/>
-            <Route path='/login' element={<Login/>}/>
             <Route path='/project' element={<Project/>}/>
             <Route path='/team'>
               <Route index element={<Team/>}/>
@@ -52,7 +54,11 @@ function App() {
             <Route path='/message' element={<Message/>}/>
             <Route path='/calendar' element={ <Calendar/>}/>
           </Routes>
-          : <Navigate to="/login"/>
+          </>
+          : 
+          <Routes>
+            <Route path='/' element={<Login/>}/>
+          </Routes>
           }
         </div>
       </ThemeProvider>
