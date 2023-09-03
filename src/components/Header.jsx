@@ -4,10 +4,14 @@ import { tokens } from '../theme';
 import { padding } from '@mui/system';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import { Link } from 'react-router-dom';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from '../firebase';
+
 
 const Header = ({ title, subtitle, button, link }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const [user] = useAuthState(auth);
   
   return (
     <Box mb="20px">
@@ -33,8 +37,8 @@ const Header = ({ title, subtitle, button, link }) => {
           </Typography>
         </Box>
         
-        {button == null ? ''
-        : <Box>
+        {user.uid == "aUOhWeqqRhgX4ZYaPnwmgiAQtN83" && button != null
+        ? <Box>
           <Link to={link}>
             <Button
               style={{
@@ -48,6 +52,7 @@ const Header = ({ title, subtitle, button, link }) => {
             </Button>
           </Link>
         </Box>
+        : ''
         }
       </Box>
     </Box>
