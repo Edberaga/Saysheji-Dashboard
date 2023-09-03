@@ -1,12 +1,13 @@
 import { React, useState, useEffect }from 'react'
 import { ProSidebar, Menu, MenuItem  } from 'react-pro-sidebar';
 import 'react-pro-sidebar/dist/css/styles.css';
-import { Box, IconButton, Typography, useTheme } from '@mui/material';
+import { Box, Button, IconButton, Typography, useTheme } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { tokens } from '../../theme';
 import { auth, db } from '../../firebase';
 import { useAuthState} from 'react-firebase-hooks/auth';
 import { signOut } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
 
 //MUI Icons
 import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
@@ -40,6 +41,7 @@ const Sidebar = () => {
 
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getUserData = async() => {
@@ -54,6 +56,16 @@ const Sidebar = () => {
     };
     getUserData();
   },[]);
+
+  const logOut = async() => {
+    try{
+      signOut(auth);
+      navigate("/");
+    }
+    catch(error) {
+      console.log(error);
+    }
+  }
 
   const [isCollapsed, setIsCollapsed] = useState(false); //Represent where the sidebar will collapse or not.
   const [selected, setSelected] = useState(); //Determine what page we select and currently at. (Dashboard) as the default
@@ -220,7 +232,7 @@ const Sidebar = () => {
               margin: "5% 0 0 15%",
               color: "red"
             }}
-            onClick={()=>{signOut(auth)}}
+            onClick={logOut}
           >
           Logout
           </Box>
