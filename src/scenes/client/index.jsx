@@ -20,7 +20,7 @@ const Client = () => {
       try{
         const q = query(
           collection(db, "users"), 
-          where("role", "==", "Team")
+          where("role", "==", "Client")
         );
         const querySnapshot = await getDocs(q);
 
@@ -57,7 +57,8 @@ const Client = () => {
         maxWidth: 175,
         borderRadius: "5px",
         backgroundColor: colors.blueAccent[900],
-        padding: "10px"
+        padding: "10px",
+        margin: "10px"
       }}>
         <CardContent style={{textAlign: "center"}}>
           <Box
