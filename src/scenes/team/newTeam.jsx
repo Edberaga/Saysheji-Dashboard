@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Header from '../../components/Header'
 import './NewTeam.css'
-import Sidebar from '../global/Sidebar'
-import { Topbar } from '../global/Topbar'
 import { Box } from '@mui/material'
 
 import { doc, serverTimestamp, setDoc } from 'firebase/firestore';
@@ -100,7 +98,6 @@ const NewTeam = () => {
   return (
   <>
   <main className="content">
-  <Topbar/>
   <Box m="20px">
     <Header title='Add New Team'/>
     

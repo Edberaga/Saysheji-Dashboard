@@ -2,8 +2,6 @@ import { Box, Button, Card, CardActions, CardContent, Typography, useTheme } fro
 import { tokens } from '../../theme';
 import {React, useState, useEffect} from 'react'
 import Header from '../../components/Header';
-import Sidebar from '../global/Sidebar';
-import { Topbar } from '../global/Topbar';
 import { useAuthState} from 'react-firebase-hooks/auth';
 import { collection, getDocs, deleteDoc, doc, where, query } from "firebase/firestore";
 import { db, auth } from '../../firebase';
@@ -41,7 +39,6 @@ const Client = () => {
   return (
 <>
   <main className="content">
-    <Topbar/>
     <Box m="20px">
       <Header title="CLIENTS" subtitle="View and Manage Clients" button="ADD CLIENT" link="/client/newClient"/>
     </Box>
