@@ -72,7 +72,7 @@ export const tokens = (mode) => ({
             900: "#e0e0e0",
         },
         primary: {
-            100: "#040509",
+            100: "#020305",
             200: "#080b12",
             300: "#0c101b",
             400: "#101624",
@@ -80,7 +80,7 @@ export const tokens = (mode) => ({
             600: "#434957",
             700: "#727681",
             800: "#a1a4ab",
-            900: "#d0d1d5",
+            900: "#fff",
         },
         redAccent: {
           100: "#331a1a",
@@ -184,6 +184,10 @@ export const themeSettings = (mode) => {
             h6: {
                 fontFamily: ["Poppins", 'sans-serif'].join(","),
                 fontSize: 15,
+            },
+            span: {
+                fontFamily: ["Poppins", 'sans-serif'].join(","),
+                fontSize: 10,
             },
         }
     };
