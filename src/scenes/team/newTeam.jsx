@@ -61,6 +61,7 @@ const NewTeam = () => {
   const handleInput = (e) => {
     const id = e.target.id;
     const value = e.target.value;
+    const defaultPassword = "Saysheji5432";
 
     setData({...data, [id]:value});
   };
@@ -73,7 +74,7 @@ const NewTeam = () => {
       const res = await createUserWithEmailAndPassword(
         auth,
         data.email,
-        data.password
+        defaultPassword
       );
       updateProfile(auth.currentUser, {
         displayName: data.username,
@@ -82,7 +83,7 @@ const NewTeam = () => {
       });
 
       /*This will add the rest data, to the Firestore "User" doc*/
-      await setDoc(doc(db, "users", res.user.email), {
+      await setDoc(doc(db, "users", res.user.uid), {
         ...data,
         timeStamp: serverTimestamp(),
         role: "Team",
@@ -143,11 +144,6 @@ const NewTeam = () => {
           <div className="formInput" key="phone">
             <label htmlFor="phone">Phone Number</label>
             <input type="text" id="phone" onChange={handleInput} />
-          </div>
-
-          <div className="formInput" key="password">
-            <label htmlFor="password">Password</label>
-            <input type="password" id="password" onChange={handleInput} />
           </div>
 
           <div className="formInputFull" key="address">

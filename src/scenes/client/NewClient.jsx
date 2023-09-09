@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import Header from '../../components/Header'
-import './NewClient.css'
 import { Box } from '@mui/material'
 
 import { doc, serverTimestamp, setDoc } from 'firebase/firestore';
@@ -12,6 +11,8 @@ import { useNavigate } from 'react-router-dom'
 const NewClient = () => {
   const [file, setFile] = useState("");
   const [data, setData] = useState({});
+  const defaultPassword= "Saysheji5432";
+
   //Declare percentage to measure the image process
   const [per, setPer] = useState(null);
 
@@ -27,31 +28,30 @@ const NewClient = () => {
 
       uploadTask.on('state_changed', 
         (snapshot) => {
-          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log('Upload is ' + progress + '% done');
-          setPer(progress);
-          switch (snapshot.state) {
-            case 'paused':
-              console.log('Upload is paused');
-              break;
-            case 'running':
-              console.log('Upload is running');
-              break;
-            default:
-              break;
-            }
-          }, 
-          (error) => {
-            console.log(error);
-          }, 
-          () => {
-            // Handle successful uploads on complete
-              getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                console.log('File available at', downloadURL);
-                setData((prev) =>({...prev, img:downloadURL}))
-            });
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log('Upload is ' + progress + '% done');
+        setPer(progress);
+        switch (snapshot.state) {
+          case 'paused':
+            console.log('Upload is paused');
+            break;
+          case 'running':
+            console.log('Upload is running');
+            break;
+          default:
+            break;
           }
-        );
+        }, 
+        (error) => {
+          console.log(error);
+        }, 
+        () => {
+        // Handle successful uploads on complete
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            console.log('File available at', downloadURL);
+            setData((prev) =>({...prev, img:downloadURL}))
+        });}
+      );
     };
     /*If there's upload file, will call the function uploadFile() */
     file && uploadFile();
@@ -69,21 +69,28 @@ const NewClient = () => {
     e.preventDefault();
     try{
       /*Add User to the Firebase Auth */
+      
       const res = await createUserWithEmailAndPassword(
         auth,
         data.email,
-        data.password
+        defaultPassword
       );
       updateProfile(auth.currentUser, {
         displayName: data.username,
+        photoURL: data.img,
+        phoneNumber: data.phone,
       });
 
       /*This will add the rest data, to the Firestore "User" doc*/
-      await setDoc(doc(db, "users", res.user.email), {
+      await setDoc(doc(db, "users", res.user.uid), {
         ...data,
         timeStamp: serverTimestamp(),
         role: "Client",
+        id: res.user.uid,
       });
+      //create empty user chats on firestore
+      await setDoc(doc(db, "messages", res.user.uid), {});
+
       navigate(-1);
     }catch(err){
       console.log(err);
@@ -138,11 +145,6 @@ const NewClient = () => {
           <div className="formInput" key="phone">
             <label htmlFor="phone">Phone Number</label>
             <input type="text" id="phone" onChange={handleInput} />
-          </div>
-
-          <div className="formInput" key="password">
-            <label htmlFor="password">Password</label>
-            <input type="password" id="password" onChange={handleInput} />
           </div>
 
           <div className="formInputFull" key="address">
