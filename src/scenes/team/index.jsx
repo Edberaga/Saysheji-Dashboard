@@ -125,24 +125,22 @@ const Team = () => {
   ];
 
   return (
-    <>
-    <main className="content">
-      <Box m="20px">
-      <Header title="TEAMS" subtitle="View your Workplace teams here and they current task" button="Add User" link="/team/newTeam"/>
+  <>
+  <Box m="20px">
+    <Header title="TEAMS" subtitle="View your Workplace teams here and they current task" button="Add User" link="/team/newTeam"/>
 
-      {/*DATA TABLE */}
-      <Box m="20px 0 0 0" height="75vh" sx={{  width: '100%' }}>
-        <DataGrid
-          rows={data}
-          columns={columns}
-          pageSize={9}
-          rowsPerPageOptions={[9]}
-          disableSelectionOnClick
-        />
-      </Box>
+    {/*DATA TABLE */}
+    <Box m="20px 0 0 0" height="75vh" sx={{  width: '100%' }}>
+      <DataGrid
+        rows={data}
+        columns={columns}
+        pageSize={9}
+        rowsPerPageOptions={[9]}
+        disableSelectionOnClick
+      />
     </Box>
-    </main>
-    </>
+  </Box>
+  </>
   )
 }
 

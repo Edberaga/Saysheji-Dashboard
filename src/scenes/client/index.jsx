@@ -37,57 +37,55 @@ const Client = () => {
   },[]);
 
   return (
-<>
-  <main className="content">
-    <Box m="20px">
-      <Header title="CLIENTS" subtitle="View and Manage Clients" button="ADD CLIENT" link="/client/newClient"/>
-    </Box>
-
-    <Box style={{
-      display: "flex",
-    }}>
-      {data.map(({id, img, username, company, position}) => (
-      <Card 
-      id={id}
-      color='white' 
-      style={{ 
-        maxWidth: 175,
-        borderRadius: "5px",
-        backgroundColor: colors.blueAccent[900],
-        padding: "10px",
-        margin: "10px"
-      }}>
-        <CardContent style={{textAlign: "center"}}>
-          <Box
-            alt="profile-user"
-            className="sidebar-box"
-            width="75px"
-            height="75px"
-            style={{
-              cursor: "pointer", 
-              borderRadius: "50%",
-              backgroundImage: `url(${img})`,
-              margin: "10px auto",
-              backgroundSize: 'cover',
-            }}
-          />
-          <Typography style={{ mb: 1.5}} color="text.secondary">
-            {username}
-          </Typography>
-          <Typography >
-            {position} at <span className='cellCompany'>{company}</span>
-          </Typography>
-        </CardContent>
-
-      <CardActions>
-        <Button variant="contained">Message</Button>
-        <Button variant="contained">View </Button>
-      </CardActions>
-    </Card>
-    ))}
+  <>
+  <Box m="20px">
+    <Header title="CLIENTS" subtitle="View and Manage Clients" button="ADD CLIENT" link="/client/newClient"/>
   </Box>
-  </main>
-</>
+
+  <Box style={{
+    display: "flex",
+  }}>
+    {data.map(({id, img, username, company, position}) => (
+    <Card 
+    id={id}
+    color='white' 
+    style={{ 
+      maxWidth: 175,
+      borderRadius: "5px",
+      backgroundColor: colors.blueAccent[900],
+      padding: "10px",
+      margin: "10px"
+    }}>
+    <CardContent style={{textAlign: "center"}}>
+      <Box
+      alt="profile-user"
+      className="sidebar-box"
+      width="75px"
+      height="75px"
+      style={{
+        cursor: "pointer", 
+        borderRadius: "50%",
+        backgroundImage: `url(${img})`,
+        margin: "10px auto",
+        backgroundSize: 'cover',
+      }}
+      />
+      <Typography style={{ mb: 1.5}} color="text.secondary">
+        {username}
+      </Typography>
+      <Typography >
+        {position} at <span className='cellCompany'>{company}</span>
+      </Typography>
+    </CardContent>
+
+    <CardActions>
+      <Button variant="contained">Message</Button>
+      <Button variant="contained">View </Button>
+    </CardActions>
+  </Card>
+  ))}
+  </Box>
+  </>
   )
 }
 

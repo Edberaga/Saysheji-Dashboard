@@ -4,13 +4,11 @@ import Header from '../../components/Header';
 
 const Project = () => {
   return (
-    <>
-    <main className="content">
-      <Box m="20px">
-        <Header title="PROJECT" subtitle="View your Projects and Tasks List" />
-      </Box>
-    </main>
-    </>
+  <>
+  <Box m="20px">
+    <Header title="PROJECT" subtitle="View your Projects and Tasks List" />
+  </Box>
+  </>
   )
 }
 
