@@ -25,6 +25,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from './firebase';
 import Sidebar from './scenes/global/Sidebar';
 import { Topbar } from './scenes/global/Topbar';
+import MissingRoute from './components/MissingRoute';
 
 
 function App() {
@@ -64,6 +65,7 @@ function App() {
     :
       <Routes>
         <Route path='/' element={<Login/>}/>
+        <Route path='*' element={<MissingRoute/>} />
       </Routes>
     }
     </ThemeProvider>
