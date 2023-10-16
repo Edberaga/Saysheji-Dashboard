@@ -36,6 +36,8 @@ const Client = () => {
     fetchData();
   },[]);
 
+  console.log(data);
+
   return (
   <>
   <Box m="20px">
@@ -47,6 +49,7 @@ const Client = () => {
   }}>
     {data.map(({id, img, username, company, position}) => (
     <Card 
+    key={id}
     id={id}
     color='white' 
     style={{ 
