@@ -5,13 +5,8 @@ import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyCDEhcgsi-mKs9f4dV93tZjgOcfAewKCNI",
+  apiKey: import.meta.env.VITE_FIREBASE_KEY,
   authDomain: "crm-by-ssj.firebaseapp.com",
   projectId: "crm-by-ssj",
   storageBucket: "crm-by-ssj.appspot.com",
