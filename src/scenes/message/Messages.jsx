@@ -7,14 +7,12 @@ const Messages = () => {
   return (
     <Box sx={{
       padding: "10px",
-      height: "calc(100% - 100px)"
+      height: "calc(100% - 100px)",
+      overflowY: "scroll"
     }}>
     <Message/>
-    
     <Message/>
-    
     <Message/>
-    
     <Message/>
     </Box>
   )
