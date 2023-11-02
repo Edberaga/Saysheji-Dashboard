@@ -13,6 +13,7 @@ import { useNavigate } from 'react-router-dom'
 const NewTeam = () => {
   const [file, setFile] = useState("");
   const [data, setData] = useState({});
+  const defaultPassword = "Saysheji5432";
   //Declare percentage to measure the image process
   const [per, setPer] = useState(null);
 
@@ -61,7 +62,6 @@ const NewTeam = () => {
   const handleInput = (e) => {
     const id = e.target.id;
     const value = e.target.value;
-    const defaultPassword = "Saysheji5432";
 
     setData({...data, [id]:value});
   };
@@ -89,6 +89,10 @@ const NewTeam = () => {
         role: "Team",
         id: res.user.uid,
       });
+
+      //create empty user chats on firestore
+      await setDoc(doc(db, "messages", res.user.uid), {});
+
       navigate(-1);
       
     }catch(err){
